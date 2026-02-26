@@ -33,6 +33,7 @@ services:
       AIRFLOW__CORE__DAGS_ARE_PAUSED_AT_CREATION: "true"
       AIRFLOW__CORE__FERNET_KEY: ""
       _PIP_ADDITIONAL_REQUIREMENTS: -r /requirements-airflow.txt
+      PYTHONPATH: /opt/airflow/src
     volumes:
       - ./dags:/opt/airflow/dags
       - ./logs:/opt/airflow/logs
@@ -53,6 +54,7 @@ services:
       AIRFLOW__CORE__FERNET_KEY: ""
       AIRFLOW__WEBSERVER__EXPOSE_CONFIG: "true"
       _PIP_ADDITIONAL_REQUIREMENTS: -r /requirements-airflow.txt
+      PYTHONPATH: /opt/airflow/src
     ports:
       - "8080:8080"
     volumes:
@@ -73,6 +75,7 @@ services:
       AIRFLOW__CORE__LOAD_EXAMPLES: "false"
       AIRFLOW__CORE__FERNET_KEY: ""
       _PIP_ADDITIONAL_REQUIREMENTS: -r /requirements-airflow.txt
+      PYTHONPATH: /opt/airflow/src
     volumes:
       - ./dags:/opt/airflow/dags
       - ./logs:/opt/airflow/logs
