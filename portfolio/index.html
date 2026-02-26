@@ -1,0 +1,200 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Scenario Planning MVP — Manoj Nawale</title>
+  <meta name="description"
+    content="Scenario Planning MVP: Airflow + MinIO + Postgres pipeline for reproducible what-if scenario analysis." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body>
+  <header class="topbar">
+    <nav class="container nav">
+      <a href="/" class="brand">Manoj Nawale</a>
+      <div class="nav-links">
+        <a class="active" href="/projects.html">Projects</a>
+        <a href="/about.html">About</a>
+        <a href="/resume.html">Resume</a>
+        <a href="/contact.html">Contact</a>
+      </div>
+    </nav>
+  </header>
+
+  <main class="container page">
+    <article class="report-card">
+      <p class="eyebrow">Data Engineering Case Study</p>
+      <h1>Scenario Planning MVP</h1>
+      <p class="lede">
+        A reproducible scenario-analysis pipeline that models demand/cost shocks and publishes auditable run artifacts
+        using Airflow, MinIO, and Postgres.
+      </p>
+
+      <section>
+        <h2>Problem it solves</h2>
+        <p>
+          Planning teams often need fast <em>what-if</em> analysis, but ad-hoc notebook workflows make runs hard to
+          reproduce and compare.
+          This project operationalizes scenario simulation into an orchestrated pipeline with consistent run metadata
+          and artifact structure.
+        </p>
+      </section>
+
+      <section>
+        <h2>How it works</h2>
+        <ul>
+          <li>Generates deterministic baseline input data (seeded synthetic dataset)</li>
+          <li>Applies scenario knobs: demand, variable cost, and logistics cost scaling</li>
+          <li>Runs a toy capacity-aware solver with overtime premium handling</li>
+          <li>Publishes inputs/outputs to MinIO partitioned by <code>dt/run_id/scenario_id</code></li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>How to run</h2>
+        <div class="codeblock">
+          <pre><code>docker compose up -d
+# open http://localhost:8080 (admin/admin)
+# trigger DAGs:
+#   hello_scenario_planning (optional)
+#   minio_smoketest (optional)
+#   scenario_planning_mvp (main)
+# validate MinIO outputs at http://localhost:9001 (bucket: scenarioops)</code></pre>
+        </div>
+      </section>
+
+      <section>
+        <h2>Repository</h2>
+        <p>
+          <a class="repo-link" href="https://github.com/your-username/scenario-planning-mvp" target="_blank"
+            rel="noreferrer">
+            github.com/your-username/scenario-planning-mvp
+          </a>
+        </p>
+      </section>
+
+      <section>
+        <h2>Architecture diagram</h2>
+        <p class="hint">Click the image to enlarge.</p>
+        <figure class="shot architecture">
+          <button class="img-btn" type="button" data-full="assets/architecture-diagram.svg"
+            data-caption="Scenario Planning MVP architecture">
+            <img src="assets/architecture-diagram.svg" alt="Scenario Planning MVP architecture diagram"
+              loading="lazy" />
+          </button>
+          <figcaption>Current MVP architecture (single-task orchestration in the main DAG).</figcaption>
+        </figure>
+      </section>
+
+      <section>
+        <h2>Screenshots / Proof</h2>
+        <p class="hint">All screenshots are clickable (open full-size).</p>
+
+        <div class="gallery">
+          <figure class="shot">
+            <button class="img-btn" type="button" data-full="assets/01-airflow-dag-list.png"
+              data-caption="Airflow DAG list showing project DAGs">
+              <img src="assets/01-airflow-dag-list.png" alt="Airflow DAG list" loading="lazy" />
+            </button>
+            <figcaption>Airflow DAG list showing project DAGs.</figcaption>
+          </figure>
+
+          <figure class="shot">
+            <button class="img-btn" type="button" data-full="assets/02-airflow-graph-main.png"
+              data-caption="Graph view for scenario_planning_mvp">
+              <img src="assets/02-airflow-graph-main.png" alt="Airflow graph view" loading="lazy" />
+            </button>
+            <figcaption>Graph view for <code>scenario_planning_mvp</code>.</figcaption>
+          </figure>
+
+          <figure class="shot">
+            <button class="img-btn" type="button" data-full="assets/03-airflow-task-success-log.png"
+              data-caption="Successful task logs for end-to-end run">
+              <img src="assets/03-airflow-task-success-log.png" alt="Airflow task success logs" loading="lazy" />
+            </button>
+            <figcaption>Successful task logs for end-to-end run.</figcaption>
+          </figure>
+
+          <figure class="shot">
+            <button class="img-btn" type="button" data-full="assets/04-minio-bucket-tree.png"
+              data-caption="Partitioned run artifacts in MinIO">
+              <img src="assets/04-minio-bucket-tree.png" alt="MinIO bucket tree" loading="lazy" />
+            </button>
+            <figcaption>Partitioned run artifacts in MinIO.</figcaption>
+          </figure>
+
+          <figure class="shot">
+            <button class="img-btn" type="button" data-full="assets/05-kpi-total-json.png"
+              data-caption="Output proof: kpi_total.json">
+              <img src="assets/05-kpi-total-json.png" alt="KPI total JSON output" loading="lazy" />
+            </button>
+            <figcaption>Output proof: <code>kpi_total.json</code>.</figcaption>
+          </figure>
+
+          <figure class="shot">
+            <button class="img-btn" type="button" data-full="assets/06-docker-compose-ps.png"
+              data-caption="Local stack status via docker compose ps">
+              <img src="assets/06-docker-compose-ps.png" alt="docker compose ps output" loading="lazy" />
+            </button>
+            <figcaption>Local stack status via <code>docker compose ps</code>.</figcaption>
+          </figure>
+        </div>
+      </section>
+    </article>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-inner">
+      <p>© <span id="y"></span> Manoj Nawale.</p>
+      <div class="socials">
+        <a href="https://github.com/manoj-nawale" target="_blank" rel="noreferrer">GitHub</a>
+        <a href="https://www.linkedin.com/" target="_blank" rel="noreferrer">LinkedIn</a>
+      </div>
+    </div>
+  </footer>
+
+  <dialog id="lightbox" class="lightbox">
+    <form method="dialog" class="lightbox-close-wrap">
+      <button class="lightbox-close" aria-label="Close image">✕</button>
+    </form>
+    <figure class="lightbox-figure">
+      <img id="lightbox-img" alt="Expanded proof screenshot" />
+      <figcaption id="lightbox-caption"></figcaption>
+    </figure>
+  </dialog>
+
+  <script>
+    document.getElementById('y').textContent = new Date().getFullYear();
+
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightbox-img');
+    const lightboxCaption = document.getElementById('lightbox-caption');
+
+    document.querySelectorAll('.img-btn').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const full = btn.getAttribute('data-full');
+        const caption = btn.getAttribute('data-caption') || '';
+        lightboxImg.src = full;
+        lightboxCaption.textContent = caption;
+        lightbox.showModal();
+      });
+    });
+
+    lightbox.addEventListener('click', (e) => {
+      const rect = lightbox.getBoundingClientRect();
+      const clickedOutside = e.clientX < rect.left || e.clientX > rect.right || e.clientY < rect.top || e.clientY > rect.bottom;
+      if (clickedOutside) lightbox.close();
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && lightbox.open) lightbox.close();
+    });
+  </script>
+</body>
+
+</html>

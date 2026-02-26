@@ -1,0 +1,31 @@
+﻿<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="820" viewBox="0 0 1400 820" role="img" aria-label="Scenario Planning MVP architecture diagram">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f8fbff"/><stop offset="1" stop-color="#eef4ff"/></linearGradient>
+    <style>
+      .title{font:700 30px Inter,Segoe UI,Arial,sans-serif;fill:#0f172a}.sub{font:500 15px Inter,Segoe UI,Arial,sans-serif;fill:#334155}
+      .h{font:700 16px Inter,Segoe UI,Arial,sans-serif;fill:#0f172a}.t{font:500 13px Inter,Segoe UI,Arial,sans-serif;fill:#334155}
+      .box{fill:#fff;stroke:#cbd5e1;stroke-width:1.5;rx:14}.accent{fill:#eff6ff;stroke:#93c5fd;stroke-width:1.5;rx:14}
+      .data{fill:#f8fafc;stroke:#cbd5e1;stroke-width:1.5;rx:14}.arrow{stroke:#2563eb;stroke-width:2.4;fill:none;marker-end:url(#m)}
+      .muted{stroke:#94a3b8;stroke-width:2;fill:none;marker-end:url(#m2)}
+    </style>
+    <marker id="m" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto"><path d="M0,0 L12,6 L0,12 z" fill="#2563eb"/></marker>
+    <marker id="m2" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto"><path d="M0,0 L12,6 L0,12 z" fill="#94a3b8"/></marker>
+  </defs>
+  <rect x="0" y="0" width="1400" height="820" fill="url(#bg)"/>
+  <text x="60" y="60" class="title">Scenario Planning MVP — Architecture</text>
+  <text x="60" y="90" class="sub">Airflow orchestration, scenario simulation, and MinIO artifact publishing</text>
+  <rect class="box" x="70" y="150" width="240" height="100"/><text x="90" y="186" class="h">User / Analyst</text><text x="90" y="212" class="t">Triggers DAG runs</text>
+  <rect class="accent" x="380" y="120" width="300" height="180"/><text x="400" y="155" class="h">Airflow (localhost:8080)</text><text x="400" y="182" class="t">DAGs:</text><text x="415" y="205" class="t">• hello_scenario_planning</text><text x="415" y="227" class="t">• minio_smoketest</text><text x="415" y="249" class="t">• scenario_planning_mvp</text>
+  <rect class="box" x="760" y="90" width="570" height="400"/><text x="785" y="126" class="h">Main DAG: scenario_planning_mvp (single Airflow task)</text>
+  <rect class="data" x="790" y="150" width="220" height="72"/><text x="806" y="178" class="h">Generate Baseline</text><text x="806" y="199" class="t">deterministic seed=7</text>
+  <rect class="data" x="790" y="255" width="220" height="72"/><text x="806" y="283" class="h">Create Scenarios</text><text x="806" y="304" class="t">baseline, demand_up_10, costs_up_10</text>
+  <rect class="data" x="790" y="360" width="220" height="72"/><text x="806" y="388" class="h">Apply Knobs</text><text x="806" y="409" class="t">demand / variable / logistics</text>
+  <rect class="data" x="1070" y="150" width="230" height="72"/><text x="1086" y="178" class="h">Toy Solver</text><text x="1086" y="199" class="t">capacity-aware + overtime premium</text>
+  <rect class="data" x="1070" y="255" width="230" height="72"/><text x="1086" y="283" class="h">Publish Artifacts</text><text x="1086" y="304" class="t">inputs/outputs + run metadata</text>
+  <rect class="accent" x="810" y="540" width="490" height="210"/><text x="835" y="576" class="h">MinIO (bucket: scenarioops)</text><text x="835" y="605" class="t">runs/dt=YYYY-MM-DD/run_id=&lt;uuid&gt;/</text><text x="855" y="628" class="t">scenario_id=&lt;scenario&gt;/inputs/scenario_spec.json</text><text x="855" y="651" class="t">scenario_id=&lt;scenario&gt;/inputs/baseline_summary.json</text><text x="855" y="674" class="t">scenario_id=&lt;scenario&gt;/outputs/fact_production.json</text><text x="855" y="697" class="t">scenario_id=&lt;scenario&gt;/outputs/kpi_total.json</text><text x="855" y="720" class="t">scenario_id=&lt;scenario&gt;/outputs/kpi_cost_breakdown.json</text>
+  <rect class="box" x="380" y="350" width="300" height="100"/><text x="400" y="386" class="h">Postgres</text><text x="400" y="412" class="t">Airflow metadata database</text>
+  <path class="arrow" d="M310 200 C 340 200, 350 200, 380 200"/><path class="arrow" d="M680 200 C 720 200, 730 180, 760 180"/>
+  <path class="arrow" d="M1010 186 C 1040 186, 1045 186, 1070 186"/><path class="arrow" d="M1010 291 C 1040 291, 1045 291, 1070 291"/><path class="arrow" d="M1070 222 C 1040 240, 1035 260, 1070 278"/>
+  <path class="arrow" d="M1185 327 C 1185 430, 1120 500, 1080 540"/><path class="muted" d="M680 400 C 730 400, 760 380, 760 340"/>
+  <text x="70" y="785" class="sub">MVP note: main business flow runs inside one PythonOperator task; v2 plan is task-level split + dynamic mapping.</text>
+</svg>

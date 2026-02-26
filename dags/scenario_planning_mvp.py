@@ -1,4 +1,4 @@
-from __future__ import annotations
+﻿from __future__ import annotations
 
 import os
 import uuid
@@ -94,10 +94,11 @@ def run_pipeline():
 
 
 with DAG(
-    dag_id="scenarioops_mvp",
+    dag_id="scenario_planning_mvp",
     start_date=datetime(2026, 2, 7),
     schedule=None,
     catchup=False,
-    tags=["scenarioops", "mvp"],
+    tags=["scenario_planning", "mvp"],
 ) as dag:
     PythonOperator(task_id="generate_and_publish_scenarios", python_callable=run_pipeline)
+

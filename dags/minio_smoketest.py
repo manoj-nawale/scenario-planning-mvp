@@ -1,4 +1,4 @@
-from __future__ import annotations
+﻿from __future__ import annotations
 
 import os
 from datetime import datetime
@@ -47,6 +47,7 @@ with DAG(
     start_date=datetime(2026, 2, 7),
     schedule=None,
     catchup=False,
-    tags=["scenarioops", "mvp", "minio"],
+    tags=["scenario_planning", "mvp", "minio"],
 ) as dag:
     PythonOperator(task_id="write_hello_to_minio", python_callable=write_to_minio)
+
